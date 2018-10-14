@@ -9,17 +9,34 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Seb Dalgarno
+## Seb Dalgarno  
+\
+
 #### Masset, BC  
 #### seb.dalgarno@gmail.com - 250-626-8978  
 
-I am an ecologist with 4 years of R programming experience. My key skills include: R package development; shiny web app development; statistical modelling; SQLite database creation/ querying; data visualization; spatial data management/manipulation. I also have experience with JavaScript (leaflet.js, d3.js) HTML and CSS for web-based interactive data visualization. Finally, I have published work in scientific journals and have extensive experience managing and conducting remote ecological fieldwork.
+I am an ecologist with 4 years of R programming experience. My key skills include: R package development; Shiny web app development; statistical modelling; SQLite database creation/ querying; data visualization; spatial data management/manipulation (top user of [sf StackOverflow tag](https://stackoverflow.com/tags/sf/topusers)). I also have experience with JavaScript (leaflet.js, d3.js) HTML and CSS for web-based interactive data visualization. Finally, I have published work in scientific journals and have extensive experience managing and conducting remote ecological fieldwork.
+
+* [GitHub](https://github.com/sebdalgarno)
+* [StackOverflow](https://stackoverflow.com/users/7911031/sebdalgarno)  
+\
+
+<!-- Example publication - http://www.ace-eco.org/vol12/iss2/art9/ -->
+<!-- Example Shiny apps -->
+<!-- https://poissonconsulting.shinyapps.io/ypr-shiny/. (Analytical tool for calculating Yield per Recruit - This is dynamically generated from the ypr package) -->
+<!-- https://poissonconsulting.shinyapps.io/klexdatr-movement/ (Interactive visualization of trout movement in Kootenay Lake from receivers and acoustic transmitters). -->
+<!-- Example R packages -->
+<!-- https://github.com/poissonconsulting/dbflobr  -->
+<!-- https://github.com/sebdalgarno/haidawave -->
+<!-- Example Reports -->
+<!-- https://www.poissonconsulting.ca/analyses/2018/04/11/quesnel-exploit-17.html - Fish exploitation study -->
+<!-- https://www.poissonconsulting.ca/analyses/2018/04/17/kaslo-bt-recruits-17.html - Productivity -->
 
 ### EDUCATION
 ##### MSc, Geography
 ###### University of Guelph - Guelph, ON 
 ###### September 2014 to May 2016
-Predictive modeling of Black Oystercatcher distribution in Haida Gwaii, BC  
+* Predictive modeling of Black Oystercatcher distribution in Haida Gwaii, BC  
 \  
 
 ##### BA, Forest Conservation
@@ -27,48 +44,68 @@ Predictive modeling of Black Oystercatcher distribution in Haida Gwaii, BC
 ###### September 2006 to May 2011  
 \  
 
+### PUBLISHED WORK
+##### Scientific Papers
+* Dalgarno, S., J. E. Mersey, Z. Gedalof, and M. Lemon. 2017. Species-environment associations and predicted distribution of Black Oystercatcher breeding pairs in Haida Gwaii, British Columbia, Canada. Avian Conservation and Ecology 12(2):9. https://doi.org/10.5751/ACE-01094-120209  
+[link to paper](http://www.ace-eco.org/vol12/iss2/art9/)
+* Arihafa, A., Dalgarno, S., and E. Neale. 2017.An estimate of above-ground carbon stock in tropical rainforest on Manus Island, Papua New Guinea. Pacific Conservation Biology 21(4) 307-314. https://doi.org/10.1071/PC15015  
+[link to paper](http://www.publish.csiro.au/PC/PC15015)
+
+##### Selected Technical Reports
+* [Quesnel Lake Exploitation Analysis](https://www.poissonconsulting.ca/analyses/2018/04/11/quesnel-exploit-17.html)
+* [Kaslo Bull Trout Productivity](https://www.poissonconsulting.ca/analyses/2018/04/17/kaslo-bt-recruits-17.html)
+
+##### Selected R packages
+* [dbflobr](https://github.com/poissonconsulting/dbflobr)
+* [haidawave](https://github.com/sebdalgarno/haidawave)
+
+##### Selected (public) Shiny apps
+* [Yield per Recruit tool](https://poissonconsulting.shinyapps.io/ypr-shiny/)
+* [Kootenay Lake Trout Movement app](https://poissonconsulting.shinyapps.io/klexdatr-movement/)  
+\  
+
 ### WORK EXPERIENCE
 ##### Computational Biologist
 ###### Poisson Consulting Ltd. - Masset, BC  
 ###### January 2017 to Present  
-Statistical modeling (Maximum Likelihood, Bayesian); R package development/maintenance; SQLite database creation/management; Shiny app development; spatial data management/manipulation in R; data visualization/map creation in R.  
+* Statistical modeling (Maximum Likelihood, Bayesian); R package development/maintenance; SQLite database creation/management; Shiny app development; spatial data management/manipulation in R; data visualization/map creation in R.  
 \  
 
 ##### Self-employed Consultant
 ###### Masset, BC  
 ###### September 2016 to January 2017  
-Various tasks in R: statistical modelling; GIS and spatial analysis; data cleaning and SQLite database creation/management; data visualization; report creation. Contracts with Parks Canada, Habitat Conservation Trust Foundation, Ministry of Forests, Lands and Natural Resource Operations, and Gowgaia Institute.  
+* Various tasks in R: statistical modelling; GIS and spatial analysis; data cleaning and SQLite database creation/management; data visualization; report creation. Contracts with Parks Canada, Habitat Conservation Trust Foundation, Ministry of Forests, Lands and Natural Resource Operations, and Gowgaia Institute.  
 \  
 
 ##### Researcher
 ###### University of Geulph - Guelph, ON
 ###### September 2015 to September 2016
-Species Distribution Modelling; shorebird and coastal/intertidal ecology; designed and conducted field work in remote Gwaii Haanas National Park Reserve over 3 weeks by kayak; all analyses/ data management done in R; results published in Avian Conservation Ecology journal.  
+* Species Distribution Modelling; shorebird and coastal/intertidal ecology; designed and conducted field work in remote Gwaii Haanas National Park Reserve over 3 weeks by kayak; all analyses/ data management done in R; results published in Avian Conservation Ecology journal.  
 \  
 
 ##### Teaching Assistant (TA)
 ###### University of Guelph - Guelph, ON -
 ###### September 2014 to September 2016
-Prepared and delivered presentations; supervised labs; graded assignments; topics covered by courses included statistical analysis, GIS and spatial analysis, remote sensing.  
+* Prepared and delivered presentations; supervised labs; graded assignments; topics covered by courses included statistical analysis, GIS and spatial analysis, remote sensing.  
 \  
 
 ##### Researcher
 ###### Canadian Wildlife Service - Queen Charlotte, BC
 ###### May 2014 to May 2015
-Lived and worked in remote part of K'uuna Gwaay Heritage Site/Conservancy retrieving ankle- band GPS loggers from breeding seabirds.  
+* Lived and worked in remote part of K'uuna Gwaay Heritage Site/Conservancy retrieving ankle- band GPS loggers from breeding seabirds.  
 \  
 
 ##### Research Intern
 ###### Wildlife Conservation Society - Lorengau, Manus, Papua New Guinea
 ###### September 2012 to September 2014
-Designed several scientific studies and managed/conducted field work in remote parts of Papua New Guinean forest; conducted statistical analyses, GIS; results published in Pacific Conservation 
+* Designed several scientific studies and managed/conducted field work in remote parts of Papua New Guinean forest; conducted statistical analyses, GIS; results published in Pacific Conservation
 Biology journal.  
 \  
 
 ##### Research Assistant
 ###### University of Toronto - Toronto, ON
 ###### September 2011 to September 2012
-Assisted Professor Neera Singh; conducted research on decentralized forest governance, community forestry, and carbon emission reduction projects from deforestation (REDD); prepared manuscripts for publication.  
+* Assisted Professor Neera Singh; conducted research on decentralized forest governance, community forestry, and carbon emission reduction projects from deforestation (REDD); prepared manuscripts for publication.  
 \  
 
 ### SKILLS
@@ -76,7 +113,7 @@ Assisted Professor Neera Singh; conducted research on decentralized forest gover
 \  
 
 ### CERTIFICATIONS/LICENCES
-PADI Open Water Diver  
-Swiftwater Safety Rescue Technician Level 3  
-Occupational First Aid
+* PADI Open Water Diver  
+* Swiftwater Safety Rescue Technician Level 3  
+* Occupational First Aid
 
