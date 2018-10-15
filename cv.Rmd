@@ -78,6 +78,9 @@ df <- tibble(Employer = c("Poisson Consulting Ltd.",
                              uot.desc
                              ))
 
+df <- df %>% mutate(`Start Date` = format(DateStart, "%B %d, %Y"),
+                    `End Date` = format(DateEnd, "%B %d, %Y"))
+
 msc.desc <- "Predictive modeling of Black Oystercatcher distribution in Haida Gwaii, BC "
 
 dfe <- tibble(University = c("University or Toronto",
@@ -89,6 +92,9 @@ dfe <- tibble(University = c("University or Toronto",
                             ymd("2014-09-01")),
               DateEnd = c(ymd("2011-05-01"),
                           ymd("2016-09-01")))
+
+dfe <- dfe %>% mutate(`Start Date` = format(DateStart, "%B %d, %Y"),
+                    `End Date` = format(DateEnd, "%B %d, %Y"))
 ```
 ## Seb Dalgarno  
 \
@@ -114,20 +120,25 @@ gpe <- ggplot(data = dfe, aes(x = DateStart, xend = DateEnd,
                             group = 1,
                     text = paste('University:', University, "<br>",
                                  'Degree:', Degree, "<br>",
-                                 "Start Date:", as.character(DateStart), "<br>", 
-                                 "End Date:", as.character(DateEnd)))) + 
+                                 "Start Date:", `Start Date`, "<br>", 
+                                 "End Date:", `End Date`))) + 
   geom_segment(size = 6, show.legend = FALSE) + 
   labs(x = NULL, y = NULL) +
   theme_classic() +
   ggtitle("Hover over segment start/end to view more information.") +
   theme(axis.text = element_text(size = 10),
         axis.text.y = element_blank(),
-        plot.title = element_text(size = 8)) 
+        plot.title = element_text(size = 8)) +
+  scale_x_date(limits = c(min(dfe$DateStart), max(df$DateEnd)))
 
 ggplotly(gpe, tooltip = c("text"), height = 150) %>% hide_legend() %>% config(displayModeBar = F)
 ```
 
 #### text
+```{r education-text, echo=FALSE}
+
+
+```
 ##### MSc, Geography
 ###### University of Guelph - Guelph, ON 
 ###### September 2014 to May 2016
@@ -143,7 +154,7 @@ ggplotly(gpe, tooltip = c("text"), height = 150) %>% hide_legend() %>% config(di
 
 ```{r education-table, echo=FALSE}
 library(DT)
-datatable(dfe %>% select(-row), class = "compact stripe", options = list(lengthChange = FALSE)) %>% DT::formatStyle(columns = c(1:6), fontSize = '85%')
+datatable(dfe %>% select(-row, -DateStart, -DateEnd), class = "compact stripe", options = list(lengthChange = FALSE)) %>% DT::formatStyle(columns = c(1:6), fontSize = '85%')
 ```
 
 
@@ -162,15 +173,16 @@ gp <- ggplot(data = df, aes(x = DateStart, xend = DateEnd,
                     text = paste('Role:', Role, "<br>",
                                  'Employer:', Employer, "<br>",
                                  'Location:', Location, "<br>",
-                                 "Start Date:", as.character(DateStart), "<br>", 
-                                 "End Date:", as.character(DateEnd)))) + 
+                                 "Start Date:", `Start Date`, "<br>", 
+                                 "End Date:", `End Date`))) + 
   geom_segment(size = 6, show.legend = FALSE) + 
   labs(x = NULL, y = NULL) +
   theme_classic() +
   ggtitle("Hover over segment start/end to view more information.") +
   theme(axis.text = element_text(size = 10),
         axis.text.y = element_blank(),
-        plot.title = element_text(size = 8)) 
+        plot.title = element_text(size = 8)) +
+  scale_x_date(limits = c(min(dfe$DateStart), max(df$DateEnd)))
 
 ggplotly(gp, tooltip = c("text"), height = 300) %>% hide_legend() %>% config(displayModeBar = F)
 ```
@@ -222,7 +234,7 @@ ggplotly(gp, tooltip = c("text"), height = 300) %>% hide_legend() %>% config(dis
 
 ```{r work-experience-table, echo=FALSE}
 library(DT)
-datatable(df %>% select(-row), class = "compact stripe", options = list(lengthChange = FALSE)) %>%
+datatable(df %>% select(-row, -DateStart, -DateEnd), class = "compact stripe", options = list(lengthChange = FALSE)) %>%
   DT::formatStyle(columns = c(1:6), fontSize = '85%')
 ```
 
