@@ -81,17 +81,21 @@ df <- tibble(Employer = c("Poisson Consulting Ltd.",
 df <- df %>% mutate(`Start Date` = format(DateStart, "%B %d, %Y"),
                     `End Date` = format(DateEnd, "%B %d, %Y"))
 
-msc.desc <- "Predictive modeling of Black Oystercatcher distribution in Haida Gwaii, BC "
+msc.desc <- "Predictive modeling of Black Oystercatcher distribution in Haida Gwaii, BC"
+ba.desc <- "Interdisciplinary coursework on forestry and forest conservation, including core science requirements."
 
 dfe <- tibble(University = c("University or Toronto",
                              "University of Guelph"),
               Degree = c("B.A. Forest Conservation",
                          "M.Sc. Geography"
                          ),
+              Location = c("Toronto, ON",
+                           "Guelph, ON"),
               DateStart = c(ymd("2006-09-01"),
                             ymd("2014-09-01")),
               DateEnd = c(ymd("2011-05-01"),
-                          ymd("2016-09-01")))
+                          ymd("2016-09-01")),
+              Description = c(ba.desc, msc.desc))
 
 dfe <- dfe %>% mutate(`Start Date` = format(DateStart, "%B %d, %Y"),
                     `End Date` = format(DateEnd, "%B %d, %Y"))
@@ -135,20 +139,15 @@ ggplotly(gpe, tooltip = c("text"), height = 150) %>% hide_legend() %>% config(di
 ```
 
 #### text
-```{r education-text, echo=FALSE}
-
-
+```{r education-text, echo=FALSE, results = 'asis'}
+dfe <- dfe %>% arrange(desc(DateStart))
+for(i in 1:nrow(dfe)){
+  cat("#####", dfe$Degree[i], "\n")
+  cat("######", dfe$University[i], " - ", dfe$Location[i], "\n")
+  cat("######", dfe$`Start Date`[i], "to", dfe$`End Date`[i], "\n\n")
+  cat("*", dfe$Description[i], "\n\n")
+}
 ```
-##### MSc, Geography
-###### University of Guelph - Guelph, ON 
-###### September 2014 to May 2016
-* `r msc.desc` 
-\  
-
-##### BA, Forest Conservation
-###### University of Toronto - Toronto, ON 
-###### September 2006 to May 2011  
-\  
 
 #### table
 
@@ -188,47 +187,15 @@ ggplotly(gp, tooltip = c("text"), height = 300) %>% hide_legend() %>% config(dis
 ```
 
 #### text
-##### Computational Biologist
-###### Poisson Consulting Ltd. - Masset, BC  
-###### January 2017 to Present  
-* `r pc.desc`  
-\  
-
-##### Self-employed Consultant
-###### Masset, BC  
-###### September 2016 to January 2017  
-* `r se.desc`  
-\  
-
-##### Researcher
-###### University of Guelph - Guelph, ON
-###### September 2015 to September 2016
-* `r rg.desc`  
-\  
-
-##### Teaching Assistant 
-###### University of Guelph - Guelph, ON -
-###### September 2014 to September 2016
-* `r ta.desc` 
-\  
-
-##### Researcher
-###### Canadian Wildlife Service - Queen Charlotte, BC
-###### May 2014 to May 2014
-* `r cws.desc`  
-\  
-
-##### Research Intern
-###### Wildlife Conservation Society - Lorengau, Manus, Papua New Guinea
-###### September 2012 to September 2014
-* `r wcs.desc` 
-\  
-
-##### Research Assistant
-###### University of Toronto - Toronto, ON
-###### September 2011 to September 2012
-* `r uot.desc` 
-\  
+```{r work-experience-text, echo=FALSE, results = 'asis'}
+df <- df %>% arrange(desc(DateEnd))
+for(i in 1:nrow(df)){
+  cat("#####", df$Role[i], "\n")
+  cat("######", df$Employer[i], " - ", df$Location[i], "\n")
+  cat("######", df$`Start Date`[i], "to", df$`End Date`[i], "\n\n")
+  cat("*", df$Description[i], "\n\n")
+}
+```
 
 #### table
 
