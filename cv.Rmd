@@ -9,6 +9,79 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r work-experience-data, include=FALSE, echo=FALSE}
+library(ggplot2)
+library(plotly)
+library(tibble)
+library(dplyr)
+library(lubridate)
+
+pc.desc <- "Statistical modeling (Maximum Likelihood, Bayesian); R package development/maintenance; SQLite database creation/management; Shiny app development; spatial data management/manipulation in R; data visualization/map creation in R."
+
+se.desc <- "Various tasks in R: statistical modelling; GIS and spatial analysis; data cleaning and SQLite database creation/management; data visualization; report creation. Contracts with Parks Canada, Habitat Conservation Trust Foundation, Ministry of Forests, Lands and Natural Resource Operations, and Gowgaia Institute."
+
+rg.desc <- "Species Distribution Modelling; shorebird and coastal/intertidal ecology; designed and conducted field work in remote Gwaii Haanas National Park Reserve over 3 weeks by kayak; all analyses/ data management done in R; results published in Avian Conservation Ecology journal."
+
+ta.desc <- "Prepared and delivered presentations; supervised labs; graded assignments; topics covered by courses included statistical analysis, GIS and spatial analysis, remote sensing."
+
+cws.desc <- "Lived and worked in remote part of K'uuna Gwaay Heritage Site/Conservancy retrieving ankle- band GPS loggers from breeding seabirds."
+
+wcs.desc <- "Designed several scientific studies and managed/conducted field work in remote parts of Papua New Guinean forest; conducted statistical analyses, GIS; results published in Pacific Conservation Biology journal."
+
+uot.desc <- "Assisted Professor Neera Singh; conducted research on decentralized forest governance, community forestry, and carbon emission reduction projects from deforestation (REDD); prepared manuscripts for publication. "
+
+df <- tibble(Employer = c("Poisson Consulting Ltd.",
+                          "Self Employed",
+                          "University of Guelph",
+                          "University of Guelph",
+                          "Canadian Wildlife Service",
+                          "Wildlife Conservation Society",
+                          "University of Toronto"),
+             Role = c("Computational Biologist",
+                      "Consultant",
+                      "Researcher",
+                      "Teaching Assistant",
+                      "Researcher",
+                      "Research Intern",
+                      "Research Assistant"
+                      ),
+             Location = c("Haida Gwaii, BC",
+                          "Haida Gwaii, BC",
+                          "Guelph, ON",
+                          "Guelph, ON",
+                          "Haida Gwaii, BC",
+                          "Manus, Papua New Guinea",
+                          "Toronto, ON"
+                          ),
+             DateStart = c(ymd("2017-01-01"),
+                           ymd("2016-09-01"),
+                           ymd("2015-09-01"),
+                           ymd("2014-09-01"),
+                           ymd("2014-05-01"),
+                           ymd("2012-09-01"),
+                           ymd("2011-09-01")
+                           ),
+             DateEnd = c(Sys.Date(),
+                         ymd("2016-12-31"),
+                         ymd("2016-09-01"),
+                         ymd("2016-09-01"),
+                         ymd("2014-05-20"),
+                         ymd("2014-09-01"),
+                         ymd("2012-09-01")
+                         ),
+             Description = c(pc.desc,
+                             se.desc,
+                             rg.desc,
+                             ta.desc,
+                             cws.desc,
+                             wcs.desc,
+                             uot.desc
+                             ))
+
+gp <- ggplot(data = df, aes(x = DateStart, xend = DateEnd, y = Employer, yend = Employer, color = Employer)) + 
+  geom_segment(size = 10)
+
+```
 ## Seb Dalgarno  
 \
 
@@ -20,17 +93,6 @@ I am an ecologist with 4 years of R programming experience. My key skills includ
 * [GitHub](https://github.com/sebdalgarno)
 * [StackOverflow](https://stackoverflow.com/users/7911031/sebdalgarno)  
 \
-
-<!-- Example publication - http://www.ace-eco.org/vol12/iss2/art9/ -->
-<!-- Example Shiny apps -->
-<!-- https://poissonconsulting.shinyapps.io/ypr-shiny/. (Analytical tool for calculating Yield per Recruit - This is dynamically generated from the ypr package) -->
-<!-- https://poissonconsulting.shinyapps.io/klexdatr-movement/ (Interactive visualization of trout movement in Kootenay Lake from receivers and acoustic transmitters). -->
-<!-- Example R packages -->
-<!-- https://github.com/poissonconsulting/dbflobr  -->
-<!-- https://github.com/sebdalgarno/haidawave -->
-<!-- Example Reports -->
-<!-- https://www.poissonconsulting.ca/analyses/2018/04/11/quesnel-exploit-17.html - Fish exploitation study -->
-<!-- https://www.poissonconsulting.ca/analyses/2018/04/17/kaslo-bt-recruits-17.html - Productivity -->
 
 ### EDUCATION
 ##### MSc, Geography
@@ -64,49 +126,85 @@ I am an ecologist with 4 years of R programming experience. My key skills includ
 * [Kootenay Lake Trout Movement app](https://poissonconsulting.shinyapps.io/klexdatr-movement/)  
 \  
 
-### WORK EXPERIENCE
+### WORK EXPERIENCE {.tabset .tabset-fade}
+#### plot
+
+```{r work-experience-plot, echo=FALSE}
+library(plotly)
+library(RColorBrewer)
+
+df %<>% arrange(DateStart) %>%
+  mutate(row = as.character(1:nrow(df)))
+gp <- ggplot(data = df, aes(x = DateStart, xend = DateEnd, 
+                            y = row, yend = row, color = row,
+                            group = 1,
+                    text = paste('Role:', Role, "<br>",
+                                 'Employer:', Employer, "<br>",
+                                 'Location:', Location, "<br>",
+                                 "Start Date:", as.character(DateStart), "<br>", 
+                                 "End Date:", as.character(DateEnd)))) + 
+  geom_segment(size = 9, show.legend = FALSE) + 
+  labs(x = NULL, y = NULL) +
+  theme_classic() +
+  ggtitle("Hover over segment start/end to view more information.") +
+  theme(axis.text = element_text(size = 12),
+        axis.text.y = element_blank(),
+        plot.title = element_text(size = 10)) 
+
+ggplotly(gp, tooltip = c("text"), height = 360) %>% hide_legend() %>% config(displayModeBar = F)
+```
+
+#### text
 ##### Computational Biologist
 ###### Poisson Consulting Ltd. - Masset, BC  
 ###### January 2017 to Present  
-* Statistical modeling (Maximum Likelihood, Bayesian); R package development/maintenance; SQLite database creation/management; Shiny app development; spatial data management/manipulation in R; data visualization/map creation in R.  
-\  
+* `r pc.desc`
 
 ##### Self-employed Consultant
 ###### Masset, BC  
 ###### September 2016 to January 2017  
-* Various tasks in R: statistical modelling; GIS and spatial analysis; data cleaning and SQLite database creation/management; data visualization; report creation. Contracts with Parks Canada, Habitat Conservation Trust Foundation, Ministry of Forests, Lands and Natural Resource Operations, and Gowgaia Institute.  
-\  
+* `r se.desc`
 
 ##### Researcher
-###### University of Geulph - Guelph, ON
+###### University of Guelph - Guelph, ON
 ###### September 2015 to September 2016
-* Species Distribution Modelling; shorebird and coastal/intertidal ecology; designed and conducted field work in remote Gwaii Haanas National Park Reserve over 3 weeks by kayak; all analyses/ data management done in R; results published in Avian Conservation Ecology journal.  
+* `r rg.desc`
 \  
 
-##### Teaching Assistant (TA)
+##### Teaching Assistant 
 ###### University of Guelph - Guelph, ON -
 ###### September 2014 to September 2016
-* Prepared and delivered presentations; supervised labs; graded assignments; topics covered by courses included statistical analysis, GIS and spatial analysis, remote sensing.  
+* `r ta.desc` 
 \  
 
 ##### Researcher
 ###### Canadian Wildlife Service - Queen Charlotte, BC
-###### May 2014 to May 2015
-* Lived and worked in remote part of K'uuna Gwaay Heritage Site/Conservancy retrieving ankle- band GPS loggers from breeding seabirds.  
+###### May 2014 to May 2014
+* `r cws.desc`  
 \  
 
 ##### Research Intern
 ###### Wildlife Conservation Society - Lorengau, Manus, Papua New Guinea
 ###### September 2012 to September 2014
-* Designed several scientific studies and managed/conducted field work in remote parts of Papua New Guinean forest; conducted statistical analyses, GIS; results published in Pacific Conservation
-Biology journal.  
+* `r wcs.desc` 
 \  
 
 ##### Research Assistant
 ###### University of Toronto - Toronto, ON
 ###### September 2011 to September 2012
-* Assisted Professor Neera Singh; conducted research on decentralized forest governance, community forestry, and carbon emission reduction projects from deforestation (REDD); prepared manuscripts for publication.  
+* `r uot.desc` 
 \  
+
+#### table
+
+```{r work-experience-table, echo=FALSE}
+library(DT)
+datatable(df, class = "compact stripe", options = list(lengthChange = FALSE)) %>%
+  DT::formatStyle(columns = c(1:6), fontSize = '85%')
+```
+
+
+</div>
 
 ### SKILLS
 `d3.js`, `leaflet.js`, `HTML`, `CSS`, `QGIS`, `ArcGIS`, `SQLite`, `Shiny`, `Machine Learning`, `Generalized Linear Model`, `R`, `Git`, `GitHub`, `Rstudio`, `ggplot2`, `tidyverse`  
