@@ -65,7 +65,7 @@ df <- tibble(Employer = c("Poisson Consulting Ltd.",
                          ymd("2016-12-31"),
                          ymd("2016-09-01"),
                          ymd("2016-09-01"),
-                         ymd("2014-05-20"),
+                         ymd("2014-06-01"),
                          ymd("2014-09-01"),
                          ymd("2012-09-01")
                          ),
@@ -106,7 +106,7 @@ dfe <- dfe %>% mutate(`Start Date` = format(DateStart, "%B %d, %Y"),
 #### Tow Hill, Haida Gwaii, BC  -  seb.dalgarno@gmail.com  -  250-626-8978  
 \
 
-I am an ecologist with 4 years of R programming experience. My key skills include: R package development; Shiny web app development; statistical modelling; SQLite database creation/ querying; data visualization; spatial data management/manipulation (top user of [sf StackOverflow tag](https://stackoverflow.com/tags/sf/topusers)). I also have experience with JavaScript (leaflet.js, d3.js) HTML and CSS for web-based interactive data visualization. Finally, I have published work in scientific journals and have extensive experience managing and conducting remote ecological fieldwork.
+I am an ecologist with 4 years of R programming experience. My key skills include: R package development; Shiny app and web development; statistical modelling; SQLite database management; SQL; data visualization; spatial data management/manipulation (top user of [sf StackOverflow tag](https://stackoverflow.com/tags/sf/topusers)). I have published work in scientific journals, co-authored numerous technical reports, and have experience managing and conducting remote ecological fieldwork.
 
 * [GitHub](https://github.com/sebdalgarno)
 * [StackOverflow](https://stackoverflow.com/users/7911031/sebdalgarno)  
@@ -225,13 +225,13 @@ datatable(df %>% select(-row, -DateStart, -DateEnd), class = "compact stripe", o
 * [Kootenay Lake Trout Movement app](https://poissonconsulting.shinyapps.io/klexdatr-movement/)  
 \  
 
-### SKILLS
-`d3.js`, `leaflet.js`, `HTML`, `CSS`, `QGIS`, `ArcGIS`, `SQLite`, `Shiny`, `Machine Learning`, `Generalized Linear Model`, `R`, `Git`, `GitHub`, `Rstudio`, `ggplot2`, `tidyverse`  
-\  
-
-### CERTIFICATIONS/LICENCES
+### CERTIFICATIONS
 * PADI Open Water Diver  
 * Swiftwater Safety Rescue Technician Level 3  
-* Occupational First Aid
+* Occupational First Aid  
+\  
+\
+
+`d3.js`, `leaflet.js`, `HTML`, `CSS`, `QGIS`, `ArcGIS`, `SQLite`, `Shiny`, `Machine Learning`, `Generalized Linear Model`, `R`, `Git`, `GitHub`, `Rstudio`, `ggplot2`, `tidyverse`
 
 
