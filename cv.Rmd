@@ -143,12 +143,9 @@ ggplotly(gpe, tooltip = c("text"), height = 150) %>% hide_legend() %>% config(di
 
 ```{r education-table, echo=FALSE}
 library(DT)
-datatable(dfe, class = "compact stripe", options = list(lengthChange = FALSE)) %>%
-  DT::formatStyle(columns = c(1:6), fontSize = '85%')
+datatable(dfe %>% select(-row), class = "compact stripe", options = list(lengthChange = FALSE)) %>% DT::formatStyle(columns = c(1:6), fontSize = '85%')
 ```
 
-
-</div>
 
 ### WORK EXPERIENCE {.tabset .tabset-fade}
 #### plot
@@ -182,17 +179,19 @@ ggplotly(gp, tooltip = c("text"), height = 300) %>% hide_legend() %>% config(dis
 ##### Computational Biologist
 ###### Poisson Consulting Ltd. - Masset, BC  
 ###### January 2017 to Present  
-* `r pc.desc`
+* `r pc.desc`  
+\  
 
 ##### Self-employed Consultant
 ###### Masset, BC  
 ###### September 2016 to January 2017  
-* `r se.desc`
+* `r se.desc`  
+\  
 
 ##### Researcher
 ###### University of Guelph - Guelph, ON
 ###### September 2015 to September 2016
-* `r rg.desc`
+* `r rg.desc`  
 \  
 
 ##### Teaching Assistant 
@@ -223,7 +222,7 @@ ggplotly(gp, tooltip = c("text"), height = 300) %>% hide_legend() %>% config(dis
 
 ```{r work-experience-table, echo=FALSE}
 library(DT)
-datatable(df, class = "compact stripe", options = list(lengthChange = FALSE)) %>%
+datatable(df %>% select(-row), class = "compact stripe", options = list(lengthChange = FALSE)) %>%
   DT::formatStyle(columns = c(1:6), fontSize = '85%')
 ```
 
