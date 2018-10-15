@@ -93,8 +93,8 @@ dfe <- tibble(University = c("University or Toronto",
 ## Seb Dalgarno  
 \
 
-#### Masset, BC  
-#### seb.dalgarno@gmail.com - 250-626-8978  
+#### Tow Hill, Haida Gwaii, BC  -  seb.dalgarno@gmail.com  -  250-626-8978  
+\
 
 I am an ecologist with 4 years of R programming experience. My key skills include: R package development; Shiny web app development; statistical modelling; SQLite database creation/ querying; data visualization; spatial data management/manipulation (top user of [sf StackOverflow tag](https://stackoverflow.com/tags/sf/topusers)). I also have experience with JavaScript (leaflet.js, d3.js) HTML and CSS for web-based interactive data visualization. Finally, I have published work in scientific journals and have extensive experience managing and conducting remote ecological fieldwork.
 
