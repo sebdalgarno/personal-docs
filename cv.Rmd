@@ -78,9 +78,17 @@ df <- tibble(Employer = c("Poisson Consulting Ltd.",
                              uot.desc
                              ))
 
-gp <- ggplot(data = df, aes(x = DateStart, xend = DateEnd, y = Employer, yend = Employer, color = Employer)) + 
-  geom_segment(size = 10)
+msc.desc <- "Predictive modeling of Black Oystercatcher distribution in Haida Gwaii, BC "
 
+dfe <- tibble(University = c("University or Toronto",
+                             "University of Guelph"),
+              Degree = c("B.A. Forest Conservation",
+                         "M.Sc. Geography"
+                         ),
+              DateStart = c(ymd("2006-09-01"),
+                            ymd("2014-09-01")),
+              DateEnd = c(ymd("2011-05-01"),
+                          ymd("2016-09-01")))
 ```
 ## Seb Dalgarno  
 \
@@ -94,11 +102,36 @@ I am an ecologist with 4 years of R programming experience. My key skills includ
 * [StackOverflow](https://stackoverflow.com/users/7911031/sebdalgarno)  
 \
 
-### EDUCATION
+### EDUCATION {.tabset .tabset-fade}
+#### plot
+
+```{r education-plot, echo=FALSE}
+
+dfe %<>% arrange(DateStart) %>%
+  mutate(row = as.character(1:nrow(dfe)))
+gpe <- ggplot(data = dfe, aes(x = DateStart, xend = DateEnd, 
+                            y = row, yend = row, color = row,
+                            group = 1,
+                    text = paste('University:', University, "<br>",
+                                 'Degree:', Degree, "<br>",
+                                 "Start Date:", as.character(DateStart), "<br>", 
+                                 "End Date:", as.character(DateEnd)))) + 
+  geom_segment(size = 6, show.legend = FALSE) + 
+  labs(x = NULL, y = NULL) +
+  theme_classic() +
+  ggtitle("Hover over segment start/end to view more information.") +
+  theme(axis.text = element_text(size = 10),
+        axis.text.y = element_blank(),
+        plot.title = element_text(size = 8)) 
+
+ggplotly(gpe, tooltip = c("text"), height = 150) %>% hide_legend() %>% config(displayModeBar = F)
+```
+
+#### text
 ##### MSc, Geography
 ###### University of Guelph - Guelph, ON 
 ###### September 2014 to May 2016
-* Predictive modeling of Black Oystercatcher distribution in Haida Gwaii, BC  
+* `r msc.desc` 
 \  
 
 ##### BA, Forest Conservation
@@ -106,25 +139,16 @@ I am an ecologist with 4 years of R programming experience. My key skills includ
 ###### September 2006 to May 2011  
 \  
 
-### PUBLISHED WORK
-##### Scientific Papers
-* Dalgarno, S., J. E. Mersey, Z. Gedalof, and M. Lemon. 2017. Species-environment associations and predicted distribution of Black Oystercatcher breeding pairs in Haida Gwaii, British Columbia, Canada. Avian Conservation and Ecology 12(2):9. https://doi.org/10.5751/ACE-01094-120209  
-[link to paper](http://www.ace-eco.org/vol12/iss2/art9/)
-* Arihafa, A., Dalgarno, S., and E. Neale. 2017.An estimate of above-ground carbon stock in tropical rainforest on Manus Island, Papua New Guinea. Pacific Conservation Biology 21(4) 307-314. https://doi.org/10.1071/PC15015  
-[link to paper](http://www.publish.csiro.au/PC/PC15015)
+#### table
 
-##### Selected Technical Reports
-* [Quesnel Lake Exploitation Analysis](https://www.poissonconsulting.ca/analyses/2018/04/11/quesnel-exploit-17.html)
-* [Kaslo Bull Trout Productivity](https://www.poissonconsulting.ca/analyses/2018/04/17/kaslo-bt-recruits-17.html)
+```{r education-table, echo=FALSE}
+library(DT)
+datatable(dfe, class = "compact stripe", options = list(lengthChange = FALSE)) %>%
+  DT::formatStyle(columns = c(1:6), fontSize = '85%')
+```
 
-##### Selected R packages
-* [dbflobr](https://github.com/poissonconsulting/dbflobr)
-* [haidawave](https://github.com/sebdalgarno/haidawave)
 
-##### Selected (public) Shiny apps
-* [Yield per Recruit tool](https://poissonconsulting.shinyapps.io/ypr-shiny/)
-* [Kootenay Lake Trout Movement app](https://poissonconsulting.shinyapps.io/klexdatr-movement/)  
-\  
+</div>
 
 ### WORK EXPERIENCE {.tabset .tabset-fade}
 #### plot
@@ -143,15 +167,15 @@ gp <- ggplot(data = df, aes(x = DateStart, xend = DateEnd,
                                  'Location:', Location, "<br>",
                                  "Start Date:", as.character(DateStart), "<br>", 
                                  "End Date:", as.character(DateEnd)))) + 
-  geom_segment(size = 9, show.legend = FALSE) + 
+  geom_segment(size = 6, show.legend = FALSE) + 
   labs(x = NULL, y = NULL) +
   theme_classic() +
   ggtitle("Hover over segment start/end to view more information.") +
-  theme(axis.text = element_text(size = 12),
+  theme(axis.text = element_text(size = 10),
         axis.text.y = element_blank(),
-        plot.title = element_text(size = 10)) 
+        plot.title = element_text(size = 8)) 
 
-ggplotly(gp, tooltip = c("text"), height = 360) %>% hide_legend() %>% config(displayModeBar = F)
+ggplotly(gp, tooltip = c("text"), height = 300) %>% hide_legend() %>% config(displayModeBar = F)
 ```
 
 #### text
@@ -203,8 +227,25 @@ datatable(df, class = "compact stripe", options = list(lengthChange = FALSE)) %>
   DT::formatStyle(columns = c(1:6), fontSize = '85%')
 ```
 
+### PUBLISHED WORK
+##### Scientific Papers
+* Dalgarno, S., J. E. Mersey, Z. Gedalof, and M. Lemon. 2017. Species-environment associations and predicted distribution of Black Oystercatcher breeding pairs in Haida Gwaii, British Columbia, Canada. Avian Conservation and Ecology 12(2):9. 
+[link to paper](http://www.ace-eco.org/vol12/iss2/art9/)
+* Arihafa, A., Dalgarno, S., and E. Neale. 2017.An estimate of above-ground carbon stock in tropical rainforest on Manus Island, Papua New Guinea. Pacific Conservation Biology 21(4) 307-314.
+[link to paper](http://www.publish.csiro.au/PC/PC15015)
 
-</div>
+##### Selected Technical Reports
+* [Quesnel Lake Exploitation Analysis](https://www.poissonconsulting.ca/analyses/2018/04/11/quesnel-exploit-17.html)
+* [Kaslo Bull Trout Productivity](https://www.poissonconsulting.ca/analyses/2018/04/17/kaslo-bt-recruits-17.html)
+
+##### Selected R packages
+* [dbflobr](https://github.com/poissonconsulting/dbflobr)
+* [haidawave](https://github.com/sebdalgarno/haidawave)
+
+##### Selected (public) Shiny apps
+* [Yield per Recruit tool](https://poissonconsulting.shinyapps.io/ypr-shiny/)
+* [Kootenay Lake Trout Movement app](https://poissonconsulting.shinyapps.io/klexdatr-movement/)  
+\  
 
 ### SKILLS
 `d3.js`, `leaflet.js`, `HTML`, `CSS`, `QGIS`, `ArcGIS`, `SQLite`, `Shiny`, `Machine Learning`, `Generalized Linear Model`, `R`, `Git`, `GitHub`, `Rstudio`, `ggplot2`, `tidyverse`  
@@ -214,4 +255,5 @@ datatable(df, class = "compact stripe", options = list(lengthChange = FALSE)) %>
 * PADI Open Water Diver  
 * Swiftwater Safety Rescue Technician Level 3  
 * Occupational First Aid
+
 
