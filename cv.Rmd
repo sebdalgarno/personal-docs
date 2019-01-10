@@ -79,7 +79,7 @@ df <- tibble(Employer = c("Poisson Consulting Ltd.",
                              ))
 
 df <- df %>% mutate(`Start Date` = format(DateStart, "%B %d, %Y"),
-                    `End Date` = format(DateEnd, "%B %d, %Y"))
+                    `End Date` = if_else(Employer == "Poisson Consulting Ltd.", "Ongoing", format(DateEnd, "%B %d, %Y")))
 
 msc.desc <- "Predictive modeling of Black Oystercatcher distribution in Haida Gwaii, BC"
 ba.desc <- "Interdisciplinary coursework on forestry and forest conservation, including core science requirements."
