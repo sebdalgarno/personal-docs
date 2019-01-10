@@ -106,7 +106,7 @@ dfe <- dfe %>% mutate(`Start Date` = format(DateStart, "%B %d, %Y"),
 #### Tow Hill, Haida Gwaii, BC  -  seb.dalgarno@gmail.com  -  250-626-8978  
 \
 
-I am an ecologist with 4 years of R programming experience. My key skills include: R package development; Shiny app and web development; statistical modelling; SQLite database management; SQL; data visualization; spatial data management/manipulation (top user of [sf StackOverflow tag](https://stackoverflow.com/tags/sf/topusers)). I have published work in scientific journals, co-authored numerous technical reports, and have experience managing and conducting remote ecological fieldwork.
+I am a computational biologist with 4 years of R programming experience. My key skills include: R package development; Statistical modelling; Shiny app and web development; SQLite database management; SQL; data visualization; spatial data management/manipulation (top user of [sf StackOverflow tag](https://stackoverflow.com/tags/sf/topusers)). I have published work in scientific journals, co-authored numerous technical reports, and have experience managing and conducting remote ecological fieldwork.
 
 * [GitHub](https://github.com/sebdalgarno)
 * [StackOverflow](https://stackoverflow.com/users/7911031/sebdalgarno)  
@@ -149,12 +149,12 @@ for(i in 1:nrow(dfe)){
 }
 ```
 
-#### table
+<!-- #### table -->
 
-```{r education-table, echo=FALSE}
-library(DT)
-datatable(dfe %>% select(-row, -DateStart, -DateEnd), class = "compact stripe", options = list(lengthChange = FALSE)) %>% DT::formatStyle(columns = c(1:6), fontSize = '85%')
-```
+<!-- ```{r education-table, echo=FALSE} -->
+<!-- library(DT) -->
+<!-- datatable(dfe %>% select(-row, -DateStart, -DateEnd), class = "compact stripe", options = list(lengthChange = FALSE)) %>% DT::formatStyle(columns = c(1:6), fontSize = '85%') -->
+<!-- ``` -->
 
 
 ### WORK EXPERIENCE {.tabset .tabset-fade}
@@ -197,13 +197,13 @@ for(i in 1:nrow(df)){
 }
 ```
 
-#### table
+<!-- #### table -->
 
-```{r work-experience-table, echo=FALSE}
-library(DT)
-datatable(df %>% select(-row, -DateStart, -DateEnd), class = "compact stripe", options = list(lengthChange = FALSE)) %>%
-  DT::formatStyle(columns = c(1:6), fontSize = '85%')
-```
+<!-- ```{r work-experience-table, echo=FALSE} -->
+<!-- library(DT) -->
+<!-- datatable(df %>% select(-row, -DateStart, -DateEnd), class = "compact stripe", options = list(lengthChange = FALSE)) %>% -->
+<!--   DT::formatStyle(columns = c(1:6), fontSize = '85%') -->
+<!-- ``` -->
 
 ### PUBLISHED WORK
 ##### Scientific Papers
@@ -217,7 +217,7 @@ datatable(df %>% select(-row, -DateStart, -DateEnd), class = "compact stripe", o
 * [Kaslo Bull Trout Productivity](https://www.poissonconsulting.ca/analyses/2018/04/17/kaslo-bt-recruits-17.html)
 
 ##### Selected R packages
-* [dbflobr](https://github.com/poissonconsulting/dbflobr)
+* [tinter](https://github.com/poissonconsulting/tinter)
 * [haidawave](https://github.com/sebdalgarno/haidawave)
 
 ##### Selected (public) Shiny apps
