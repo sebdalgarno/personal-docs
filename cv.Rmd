@@ -26,7 +26,7 @@ ta.desc <- "Prepared and delivered presentations; supervised labs; graded assign
 
 cws.desc <- "Lived and worked in remote part of K'uuna Gwaay Heritage Site/Conservancy retrieving ankle- band GPS loggers from breeding seabirds."
 
-wcs.desc <- "Designed several scientific studies and managed/conducted field work in remote parts of Papua New Guinean forest; conducted statistical analyses, GIS; results published in Pacific Conservation Biology journal."
+wcs.desc <- "Developed experimental design, coordinated field work and conducted statistical analyses to assess and predict above-ground biomass in tropical rainforest; results published in Pacific Conservation Biology journal."
 
 uot.desc <- "Assisted Professor Neera Singh; conducted research on decentralized forest governance, community forestry, and carbon emission reduction projects from deforestation (REDD); prepared manuscripts for publication. "
 
