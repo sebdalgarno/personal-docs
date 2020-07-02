@@ -1,12 +1,32 @@
 ---
 title: ""
 author: "Seb Dalgarno"
-date: '2018-10-14'
+date: '2020-07-02'
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+colorize <- function(x, color) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{%s}", color, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'>%s</span>", color, 
+      x)
+  } else x
+}
+
+gg_color_hue <- function(n) {
+  hues = seq(15, 375, length = n + 1)
+  hcl(h = hues, l = 65, c = 100)[1:n]
+}
+
+library(RColorBrewer)
+
+palette2 <- RColorBrewer::brewer.pal(2, "Dark2")
+print(palette2)
+palette5 <- RColorBrewer::brewer.pal(5, "Dark2")
+print(palette5)
 ```
 
 ```{r work-experience-data, include=FALSE, echo=FALSE}
@@ -16,11 +36,11 @@ library(tibble)
 library(dplyr)
 library(lubridate)
 
-pc.desc <- "Statistical modeling (Maximum Likelihood, Bayesian); R package development/maintenance; SQLite database creation/management; Shiny app development; spatial data management/manipulation in R; data visualization/map creation in R."
+pc.desc <- "Statistical modeling (Maximum Likelihood, Bayesian); R package development/maintenance; SQLite and Postgres database creation/management; Web app development; GIS."
 
-se.desc <- "Various tasks in R: statistical modelling; GIS and spatial analysis; data cleaning and SQLite database creation/management; data visualization; report creation. Contracts with Parks Canada, Habitat Conservation Trust Foundation, Ministry of Forests, Lands and Natural Resource Operations, and Gowgaia Institute."
+se.desc <- "GIS; statistical modelling; data cleaning and SQLite database creation/management. Contracts with Parks Canada, Habitat Conservation Trust Foundation, Ministry of Forests, Lands and Natural Resource Operations, and Gowgaia Institute."
 
-rg.desc <- "Species Distribution Modelling; shorebird and coastal/intertidal ecology; designed and conducted field work in remote Gwaii Haanas National Park Reserve over 3 weeks by kayak; all analyses/ data management done in R; results published in Avian Conservation Ecology journal."
+rg.desc <- "Species Distribution Modelling; shorebird and coastal/intertidal ecology; designed and conducted field work in remote Gwaii Haanas National Park Reserve over 3 weeks by kayak; predictive modelling/data management in R; results published in Avian Conservation Ecology journal."
 
 ta.desc <- "Prepared and delivered presentations; supervised labs; graded assignments; topics covered by courses included statistical analysis, GIS and spatial analysis, remote sensing."
 
@@ -79,7 +99,9 @@ df <- tibble(Employer = c("Poisson Consulting Ltd.",
                              ))
 
 df <- df %>% mutate(`Start Date` = format(DateStart, "%B %d, %Y"),
-                    `End Date` = if_else(Employer == "Poisson Consulting Ltd.", "Ongoing", format(DateEnd, "%B %d, %Y")))
+                    `End Date` = if_else(Employer == "Poisson Consulting Ltd.", "Ongoing", format(DateEnd, "%B %d, %Y"))) %>%
+  arrange(desc(DateStart)) %>%
+  mutate(row = as.factor(1:nrow(df)))
 
 msc.desc <- "Predictive modeling of Black Oystercatcher distribution in Haida Gwaii, BC"
 ba.desc <- "Interdisciplinary coursework on forestry and forest conservation, including core science requirements."
@@ -98,27 +120,25 @@ dfe <- tibble(University = c("University or Toronto",
               Description = c(ba.desc, msc.desc))
 
 dfe <- dfe %>% mutate(`Start Date` = format(DateStart, "%B %d, %Y"),
-                    `End Date` = format(DateEnd, "%B %d, %Y"))
+                    `End Date` = format(DateEnd, "%B %d, %Y")) %>%
+  arrange(desc(DateStart)) %>%
+  mutate(row = as.factor(1:nrow(dfe)))
 ```
 ## Seb Dalgarno  
 \
 
-#### Tow Hill, Haida Gwaii, BC  -  seb.dalgarno@gmail.com  -  250-626-8978  
+#### Masset, Haida Gwaii, BC  -  seb.dalgarno@gmail.com  -  250-626-8978 -  [GitHub Profile](https://github.com/sebdalgarno)  
 \
 
-I am a computational biologist with 4 years of R programming experience. My key skills include: R package development; statistical modelling; Shiny app and web development; SQLite database management; SQL; data visualization; spatial data management/manipulation (top user of [sf StackOverflow tag](https://stackoverflow.com/tags/sf/topusers)). I have published work in scientific journals, co-authored numerous technical reports, and have experience managing and conducting remote ecological fieldwork.
+I am a computational biologist with 6 years of R programming experience. My key skills include: R package development; Bayesian statistical modelling; web application development; SQLite and Postgres database management; SQL; GIS (top user of [sf StackOverflow tag](https://stackoverflow.com/tags/sf/topusers)). I have published work in scientific journals, co-authored numerous technical reports, and have experience managing and conducting remote ecological fieldwork.
 
-* [GitHub](https://github.com/sebdalgarno)
-* [StackOverflow](https://stackoverflow.com/users/7911031/sebdalgarno)  
+<!-- * [StackOverflow](https://stackoverflow.com/users/7911031/sebdalgarno)   -->
 \
 
-### EDUCATION {.tabset .tabset-fade}
-#### plot
-
-```{r education-plot, echo=FALSE}
-
-dfe %<>% arrange(DateStart) %>%
-  mutate(row = as.character(1:nrow(dfe)))
+### EDUCATION 
+&nbsp;
+```{r education-plot, echo=FALSE, fig.height=1}
+# dfe <- dfe %>% arrange(DateStart)
 gpe <- ggplot(data = dfe, aes(x = DateStart, xend = DateEnd, 
                             y = row, yend = row, color = row,
                             group = 1,
@@ -128,45 +148,40 @@ gpe <- ggplot(data = dfe, aes(x = DateStart, xend = DateEnd,
                                  "End Date:", `End Date`))) + 
   geom_segment(size = 6, show.legend = FALSE) + 
   labs(x = NULL, y = NULL) +
-  theme_classic() +
-  ggtitle("Hover over segment start/end to view more information.") +
+  scale_color_manual(values = palette2) +
+  theme_classic()  +
   theme(axis.text = element_text(size = 10),
         axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
         plot.title = element_text(size = 8)) +
   scale_x_date(limits = c(min(dfe$DateStart), max(df$DateEnd)))
-
-ggplotly(gpe, tooltip = c("text"), height = 150) %>% hide_legend() %>% config(displayModeBar = F)
+# ggplotly(gpe, tooltip = c("text"), height = 150) %>% hide_legend() %>% config(displayModeBar = F)
+gpe
 ```
 
-#### text
-```{r education-text, echo=FALSE, results = 'asis'}
-dfe <- dfe %>% arrange(desc(DateStart))
-for(i in 1:nrow(dfe)){
-  cat("#####", dfe$Degree[i], "\n")
-  cat("######", dfe$University[i], " - ", dfe$Location[i], "\n")
-  cat("######", dfe$`Start Date`[i], "to", dfe$`End Date`[i], "\n\n")
-  cat("*", dfe$Description[i], "\n\n")
-}
-```
+##### `r colorize(dfe$Degree[1], palette2[1])`
+###### `r dfe$University[1]` - `r dfe$Location[1]`
+###### `r dfe[['Start Date']][1]` to `r dfe[['End Date']][1]`
+`r dfe$Description[1]`
 
-<!-- #### table -->
+&nbsp;
 
-<!-- ```{r education-table, echo=FALSE} -->
-<!-- library(DT) -->
-<!-- datatable(dfe %>% select(-row, -DateStart, -DateEnd), class = "compact stripe", options = list(lengthChange = FALSE)) %>% DT::formatStyle(columns = c(1:6), fontSize = '85%') -->
-<!-- ``` -->
+##### `r colorize(dfe$Degree[2], palette2[2])`
+###### `r dfe$University[2]` - `r dfe$Location[2]`
+###### `r dfe[['Start Date']][2]` to `r dfe[['End Date']][2]`
+`r dfe$Description[2]`
 
+&nbsp;
 
-### WORK EXPERIENCE {.tabset .tabset-fade}
-#### plot
+### WORK EXPERIENCE 
+&nbsp;
 
-```{r work-experience-plot, echo=FALSE}
+```{r work-experience-plot, echo=FALSE, fig.height=1.5}
 library(plotly)
 library(RColorBrewer)
 
-df %<>% arrange(DateStart) %>%
-  mutate(row = as.character(1:nrow(df)))
-gp <- ggplot(data = df, aes(x = DateStart, xend = DateEnd, 
+# df <- df %>% arrange(DateStart)
+gp <- ggplot(data = df[c(1, 2, 4, 6, 7),], aes(x = DateStart, xend = DateEnd, 
                             y = row, yend = row, color = row,
                             group = 1,
                     text = paste('Role:', Role, "<br>",
@@ -176,54 +191,73 @@ gp <- ggplot(data = df, aes(x = DateStart, xend = DateEnd,
                                  "End Date:", `End Date`))) + 
   geom_segment(size = 6, show.legend = FALSE) + 
   labs(x = NULL, y = NULL) +
+  scale_color_manual(values = palette5) +
   theme_classic() +
-  ggtitle("Hover over segment start/end to view more information.") +
+  # ggtitle("Hover over segment start/end to view more information.") +
   theme(axis.text = element_text(size = 10),
         axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
         plot.title = element_text(size = 8)) +
-  scale_x_date(limits = c(min(dfe$DateStart), max(df$DateEnd)))
-
-ggplotly(gp, tooltip = c("text"), height = 300) %>% hide_legend() %>% config(displayModeBar = F)
+  scale_x_date(limits = c(min(df$DateStart), max(df$DateEnd)))
+gp
+# ggplotly(gp, tooltip = c("text"), height = 300) %>% hide_legend() %>% config(displayModeBar = F)
 ```
 
-#### text
-```{r work-experience-text, echo=FALSE, results = 'asis'}
-df <- df %>% arrange(desc(DateEnd))
-for(i in 1:nrow(df)){
-  cat("#####", df$Role[i], "\n")
-  cat("######", df$Employer[i], " - ", df$Location[i], "\n")
-  cat("######", df$`Start Date`[i], "to", df$`End Date`[i], "\n\n")
-  cat("*", df$Description[i], "\n\n")
-}
-```
+##### `r colorize(df$Role[1], palette5[1])`
+###### [`r df$Employer[1]`](https://www.poissonconsulting.ca/) - `r df$Location[1]`
+###### `r df[['Start Date']][1]` to `r df[['End Date']][1]`
+`r df$Description[1]`
 
-<!-- #### table -->
+&nbsp;
 
-<!-- ```{r work-experience-table, echo=FALSE} -->
-<!-- library(DT) -->
-<!-- datatable(df %>% select(-row, -DateStart, -DateEnd), class = "compact stripe", options = list(lengthChange = FALSE)) %>% -->
-<!--   DT::formatStyle(columns = c(1:6), fontSize = '85%') -->
-<!-- ``` -->
+##### `r colorize(df$Role[2], palette5[2])`
+###### `r df$Employer[2]` - `r df$Location[2]`
+###### `r df[['Start Date']][2]` to `r df[['End Date']][2]`
+`r df$Description[2]`
+
+&nbsp;
+
+##### `r colorize(df$Role[4], palette5[3])`
+###### `r df$Employer[4]` - `r df$Location[4]`
+###### `r df[['Start Date']][4]` to `r df[['End Date']][4]`
+`r df$Description[4]`
+
+&nbsp;
+
+##### `r colorize(df$Role[6], palette5[4])`
+###### `r df$Employer[6]` - `r df$Location[6]`
+###### `r df[['Start Date']][6]` to `r df[['End Date']][6]`
+`r df$Description[6]`
+
+&nbsp;
+
+##### `r colorize(df$Role[7], palette5[5])`
+###### `r df$Employer[7]` - `r df$Location[7]`
+###### `r df[['Start Date']][7]` to `r df[['End Date']][7]`
+`r df$Description[7]`
+
+&nbsp;
 
 ### PUBLISHED WORK
+
 ##### Scientific Papers
+
 * Dalgarno, S., J. E. Mersey, Z. Gedalof, and M. Lemon. 2017. Species-environment associations and predicted distribution of Black Oystercatcher breeding pairs in Haida Gwaii, British Columbia, Canada. Avian Conservation and Ecology 12(2):9. 
 [link to paper](http://www.ace-eco.org/vol12/iss2/art9/)
 * Arihafa, A., Dalgarno, S., and E. Neale. 2017.An estimate of above-ground carbon stock in tropical rainforest on Manus Island, Papua New Guinea. Pacific Conservation Biology 21(4) 307-314.
 [link to paper](http://www.publish.csiro.au/PC/PC15015)
 
 ##### Selected Technical Reports
-* [Quesnel Lake Exploitation Analysis](https://www.poissonconsulting.ca/analyses/2018/04/11/quesnel-exploit-17.html)
-* [Kaslo Bull Trout Productivity](https://www.poissonconsulting.ca/analyses/2018/04/17/kaslo-bt-recruits-17.html)
+* [Quesnel Lake Exploitation Analysis](https://www.poissonconsulting.ca/analyses/quesnel-exploit-19/)
+* [Trans Mountain Expansion Project Power Analysis](https://www.researchgate.net/publication/342184077_Trans_Mountain_Expansion_Project_and_Oil_Spills_Power_Analysis_on_Pacific_Salmon_Data)
 
 ##### Selected R packages
-* [tinter](https://github.com/poissonconsulting/tinter)
-* [haidawave](https://github.com/sebdalgarno/haidawave)
+* [dbflobr](https://poissonconsulting.github.io/dbflobr/)
+* [fwapgr](https://poissonconsulting.github.io/fwapgr/)
 
-##### Selected (public) Shiny apps
-* [Yield per Recruit tool](https://poissonconsulting.shinyapps.io/ypr-shiny/)
-* [Kootenay Lake Trout Movement app](https://poissonconsulting.shinyapps.io/klexdatr-movement/)  
-\  
+##### Selected web apps
+* [bcgov ssdtools app](https://bcgov-env.shinyapps.io/ssdtools/)
+* [Haida Gwaii logging history app](https://haidagwaiilogging.netlify.app/)  
 
 ### CERTIFICATIONS
 * PADI Open Water Diver  
@@ -232,6 +266,6 @@ for(i in 1:nrow(df)){
 \  
 \
 
-`d3.js`, `leaflet.js`, `HTML`, `CSS`, `QGIS`, `ArcGIS`, `SQLite`, `Shiny`, `Machine Learning`, `Generalized Linear Model`, `R`, `Git`, `GitHub`, `Rstudio`, `ggplot2`, `tidyverse`
+`R`, `JavaScript`, `HTML`, `CSS`, `svelte`, `d3.js`, `SQLite`, `PostgreSQL`, `QGIS`, `Git`,  `ggplot2`, `tidyverse`, `Shiny`, `GitHub`, `Rstudio`
 
 
